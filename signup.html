@@ -3,88 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ETEC_2104</title>
+    <title>Sign Up</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f2f2f2;
         }
-        .header {
-            background-color: blue;
-            color: white;
-            padding: 10px;
-            text-align: right;
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
         }
-        .signup {
+
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
             padding: 20px;
-            margin-top: 30px;
-            border: 1px solid #ccc;
-            width: 300px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: #f9f9f9;
+            border: 1px solid #888;
+            width: 400px;
             border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .signup div {
+
+        .header {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-group {
             margin-bottom: 15px;
         }
-        .signup button {
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
             width: 100%;
             padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .button {
+            width: 100%;
+            padding: 12px;
             background-color: blue;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
         }
-        .signup button:hover {
+
+        .button:hover {
             background-color: darkblue;
         }
-        .error {
+
+        
+        .error-message {
             color: red;
-            font-size: 12px;
+            font-size: 14px;
+            margin-top: 10px;
+            border: 1px solid red;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        
+        .success-banner {
+            background-color: green;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 4px;
         }
     </style>
 </head>
 <body>
-    <div class="signup">
-        <div>Email: <input id="email" size="10" type="email"></div>
-        <div>Password: <input id="password" size="10" type="password"></div>
-        <div>Date of Birth: <input id="dob" type="date"></div>
-        <hr>
-        <button onclick="signup()">Sign Up!</button>
-        <div id="error-message" class="error"></div>
+
+    
+    <button id="openModalButton" class="button" style="margin: 50px; padding: 10px 20px;">Sign Up</button>
+
+    
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="header">Sign Up</div>
+
+            
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="realname">Real Name</label>
+                <input type="text" id="realname" placeholder="Enter your real name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+
+            <div class="input-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" required>
+            </div>
+
+            <button class="button" onclick="submitForm()">Sign Up</button>
+
+            <div id="error-message-container"></div>
+            <div id="success-banner" class="success-banner" style="display: none;">Welcome!</div>
+        </div>
     </div>
 
     <script>
-        function signup() {
-            document.getElementById('error-message').innerHTML = '';
+        document.getElementById('openModalButton').onclick = function() {
+            document.getElementById('signupModal').style.display = 'block';
+        };
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('signupModal')) {
+                document.getElementById('signupModal').style.display = 'none';
+            }
+        };
+
+        function submitForm() {
+            document.getElementById('error-message-container').innerHTML = '';
+            document.getElementById('success-banner').style.display = 'none';
 
             const email = document.getElementById('email').value;
+            const realname = document.getElementById('realname').value;
             const password = document.getElementById('password').value;
             const dob = document.getElementById('dob').value;
 
-            if (!email || !password || !dob) {
-                document.getElementById('error-message').innerText = 'All fields are required.';
-                return;
+            let errorMessages = [];
+
+            if (!email || !realname || !password || !dob) {
+                errorMessages.push('All fields are required.');
             }
 
             const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if (!emailPattern.test(email)) {
-                document.getElementById('error-message').innerText = 'Please enter a valid email address.';
-                return;
+            if (email && !emailPattern.test(email)) {
+                errorMessages.push('Please enter a valid email address.');
             }
 
             const birthDate = new Date(dob);
             const age = new Date().getFullYear() - birthDate.getFullYear();
             if (age < 13) {
-                document.getElementById('error-message').innerText = 'You must be at least 13 years old to sign up.';
-                return;
+                errorMessages.push('You must be at least 13 years old to sign up.');
             }
 
-            alert('Welcome In');
+            if (errorMessages.length > 0) {
+                const errorMessageContainer = document.getElementById('error-message-container');
+                errorMessages.forEach(function(message) {
+                    const errorMessageElement = document.createElement('div');
+                    errorMessageElement.className = 'error-message';
+                    errorMessageElement.textContent = message;
+                    errorMessageContainer.appendChild(errorMessageElement);
+                });
+            } else {
+                document.getElementById('success-banner').style.display = 'block';
+                setTimeout(function() {
+                    document.getElementById('signupModal').style.display = 'none';
+                }, 1000);
+            }
         }
     </script>
+
 </body>
 </html>
