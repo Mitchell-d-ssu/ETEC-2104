@@ -59,28 +59,23 @@
 
     <script>
         function signup() {
-            // Clear previous error messages
             document.getElementById('error-message').innerHTML = '';
 
-            // Get user inputs
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const dob = document.getElementById('dob').value;
 
-            // Check if any input is missing
             if (!email || !password || !dob) {
                 document.getElementById('error-message').innerText = 'All fields are required.';
                 return;
             }
 
-            // Check if the email looks valid
             const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!emailPattern.test(email)) {
                 document.getElementById('error-message').innerText = 'Please enter a valid email address.';
                 return;
             }
 
-            // Check if the user is at least 13 years old
             const birthDate = new Date(dob);
             const age = new Date().getFullYear() - birthDate.getFullYear();
             if (age < 13) {
@@ -88,8 +83,7 @@
                 return;
             }
 
-            // If no errors, show success message (for demonstration)
-            alert('Sign Up Successful!');
+            alert('Welcome In');
         }
     </script>
 </body>
