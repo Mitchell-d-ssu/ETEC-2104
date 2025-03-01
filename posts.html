@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .post-list {
+            max-height: 500px;
+            overflow-y: scroll;
+            list-style-type: none;
+            padding: 0;
+        }
+        .post {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .post:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+        .thumbnail {
+            width: 64px;
+            height: 64px;
+            margin-right: 20px;
+            background-color: #ccc;
+        }
+        .post-details {
+            flex: 1;
+        }
+        .post-time, .post-views {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Past Posts</h1>
+    <ul class="post-list">
+        <li class="post">
+            <div class="thumbnail"></div>
+            <div class="post-details">
+                <p class="post-time">6 days ago</p>
+                <p class="post-views">Views: 10</p>
+            </div>
+        </li>
+        <li class="post">
+            <div class="thumbnail"></div>
+            <div class="post-details">
+                <p class="post-time">5 days ago</p>
+                <p class="post-views">Views: 8</p>
+            </div>
+        </li>
+        <li class="post">
+            <div class="thumbnail"></div>
+            <div class="post-details">
+                <p class="post-time">1 week ago</p>
+                <p class="post-views">Views: 14</p>
+            </div>
+        </li>
+        <li class="post">
+            <div class="thumbnail"></div>
+            <div class="post-details">
+                <p class="post-time">3 days ago</p>
+                <p class="post-views">Views: 10</p>
+            </div>
+        </li>
+        <li class="post">
+            <div class="thumbnail"></div>
+            <div class="post-details">
+                <p class="post-time">5 days ago</p>
+                <p class="post-views">Views: 8</p>
+            </div>
+        </li>
+        <li class="post">
+            <div class="thumbnail"></div>
+            <div class="post-details">
+                <p class="post-time">1 week ago</p>
+                <p class="post-views">Views: 14</p>
+            </div>
+        </li>
+        <li class="post">
+            <div class="thumbnail"></div>
+            <div class="post-details">
+                <p class="post-time">1 day ago</p>
+                <p class="post-views">Views: 10</p>
+            </div>
+        </li>
+        <li class="post">
+            <div class="thumbnail"></div>
+            <div class="post-details">
+                <p class="post-time">2 days ago</p>
+                <p class="post-views">Views: 8</p>
+            </div>
+        </li>
+        <li class="post">
+            <div class="thumbnail"></div>
+            <div class="post-details">
+                <p class="post-time">1 week ago</p>
+                <p class="post-views">Views: 14</p>
+            </div>
+        </li>
+        <li class="post">
+            <div class="thumbnail"></div>
+            <div class="post-details">
+                <p class="post-time">4 weeks ago</p>
+                <p class="post-views">Views: 14</p>
+            </div>
+        </li>
+
+        <!-- Add more posts as needed -->
+    </ul>
+</body>
+</html>
